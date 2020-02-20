@@ -14,4 +14,6 @@ class Automaton{
 	private:
 		vector<bool> _cellConfig;
 		vector<bool> _rule;
+		
+		bool _evolve(int cell, vector<bool>& previous) const;
 };

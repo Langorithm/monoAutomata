@@ -27,6 +27,15 @@ int decToBin(int n){
 	return decToBinF(n,0);
 }
 
+std::vector<bool> vIntTovBool (std::vector<int> v){
+	std::vector<bool> res(v.size());
+
+	for (int i = 0; i<v.size(); i++)
+		res[i] = bool(v[i]);
+
+	return res;
+}
+
 template <class T>
 void printVector(std::vector<T> v){
 		
