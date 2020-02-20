@@ -1,14 +1,17 @@
 #include<vector>
 
-class automaton{
+using namespace std;
+
+class Automaton{
 	public:
-		bool read(int cell);
+		Automaton(int rule, int size);
+		
+		int getRule() const ;
+		bool read(int cell) const;
 		
 		void tick();
 
-		automaton(int size);
-
 	private:
-		vector<bool> cellConfig;
-
+		vector<bool> _cellConfig;
+		vector<bool> _rule;
 };
