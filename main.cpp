@@ -26,19 +26,28 @@ void printAutomaton(Automaton& a){
 }
 
 int main(){
-		
+
+	cout << "Rule: ";
+	int rule;
+	cin >> rule; 
+
 	//Init ncurses
 	initscr(); cbreak(); noecho();
 	scrollok(stdscr, true);
-	Automaton autocell(110, COLS);
+	Automaton autocell(rule, COLS);
 
 	char input = ' ';
 	
 	move(LINES-1, 0);
 
+	bool noPause = false;
 	while (input != 'q'){
+		if (input == 'p' ) noPause = !noPause;
+		nodelay(stdscr, noPause);
 		refresh();
-			
+		
+
+
 		printAutomaton(autocell);
 		autocell.tick();
 		input = getch();
