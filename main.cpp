@@ -1,7 +1,7 @@
 #include "automaton.h"
-#include <ncurses.h>
-#include <iostream>
-#include "coinToss.h"
+#include <ncurses.h>	
+#include <iostream>		//Cout
+#include "dieRoll.h" 		//d4
 using namespace std;
 
 void myPrint(vector<bool> vb){
@@ -37,10 +37,9 @@ int main(){
 	scrollok(stdscr, true);
 	
 	//Generate Random Config
-	Coin coin;
 	vector<bool> initialConfig(COLS);
 	for (int i=0; i<COLS; i++)
-		initialConfig[i] = bool(coin.toss());
+		initialConfig[i] = bool(d4.roll()%2);
 
 	Automaton autocell(rule, initialConfig);
 
