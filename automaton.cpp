@@ -23,6 +23,26 @@ Automaton::Automaton(int rule, int size){
 	
 }
 
+Automaton::Automaton(int rule, vector<bool> initialConfig){
+	_cellConfig = initialConfig;
+
+	//Defend against invalid rule codes
+	if (0 > rule || rule > 255)
+		rule = 0;
+
+	//Transform decimal rule code to a more confortable vector form
+	
+	vector<int> ruleDigits = digitize(decToBin(rule));
+	printVector(ruleDigits);
+	
+	_rule = vector<bool>(8-ruleDigits.size(),false);
+	for (int elem : ruleDigits)
+		_rule.push_back(elem);	
+	
+
+
+}
+
 vector<bool> Automaton::getRule() const {
 	return _rule;
 }

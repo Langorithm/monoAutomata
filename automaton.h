@@ -4,7 +4,8 @@ using namespace std;
 class Automaton{
 	public:
 		Automaton(int rule, int size);
-		
+		Automaton(int rule, vector<bool> initialConfig);
+
 		vector<bool> getRule() const ;
 		int getSize() const ;
 		bool read(int cell) const;

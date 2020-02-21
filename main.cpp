@@ -1,6 +1,7 @@
 #include "automaton.h"
 #include <ncurses.h>
 #include <iostream>
+#include "coinToss.h"
 using namespace std;
 
 void myPrint(vector<bool> vb){
@@ -34,7 +35,14 @@ int main(){
 	//Init ncurses
 	initscr(); cbreak(); noecho();
 	scrollok(stdscr, true);
-	Automaton autocell(rule, COLS);
+	
+	//Generate Random Config
+	Coin coin;
+	vector<bool> initialConfig(COLS);
+	for (int i=0; i<COLS; i++)
+		initialConfig[i] = bool(coin.toss());
+
+	Automaton autocell(rule, initialConfig);
 
 	char input = ' ';
 	
