@@ -11,14 +11,27 @@ Automaton::Automaton(int rule, int size){
 		rule = 0;
 
 	//Transform decimal rule code to a more confortable vector form
-	_rule = vIntTovBool(digitize(decToBin(rule)));
-	while (_rule.size() < 9)	//Fill with zeroes
-		_rule.push_back(0);
+	
+	vector<int> ruleDigits = digitize(decToBin(rule));
+	printVector(ruleDigits);
+	
+	_rule = vector<bool>(8-ruleDigits.size(),false);
+	for (int elem : ruleDigits)
+		_rule.push_back(elem);	
+	
+	
 	
 }
 
-int Automaton::getRule() const {
-	return 0;
+vector<bool> Automaton::getRule() const {
+	return _rule;
+}
+
+vector<bool> Automaton::getConfig() const {
+	return _cellConfig;
+}
+int Automaton::getSize() const {
+	return _cellConfig.size();
 }
 
 bool Automaton::read(int cell) const {
@@ -32,9 +45,9 @@ bool Automaton::_evolve(int cell, vector<bool>& previous) const {
 	int left = center - 1; left += size; left %= size;
 	int rite = center + 1; rite += size; rite %= size;
 		
-	int check = previous[left] * 100 + previous[center] * 10 + previous[rite];
-
-	return _rule[check];
+	int check = previous[left] * 4 + previous[center] * 2 + previous[rite];
+	//cout << check << endl;
+	return _rule[7-check];
 }
 
 void Automaton::tick(){
