@@ -28,6 +28,7 @@ void printAutomaton(Automaton& a){
 
 int main(){
 
+	char input = ' ';
 	cout << "Rule: ";
 	int rule;
 	cin >> rule; 
@@ -35,16 +36,19 @@ int main(){
 	//Init ncurses
 	initscr(); cbreak(); noecho();
 	scrollok(stdscr, true);
+		Automaton autocell(rule, COLS);
 	
-	//Generate Random Config
-	vector<bool> initialConfig(COLS);
-	for (int i=0; i<COLS; i++)
-		initialConfig[i] = bool(d4.roll()%2);
+	cout << "Press R for random configuration" << endl;
+	cin >> input;
+	if (input == 'r' || input == 'R'){
+		vector<bool> initialConfig(COLS);
+		for (int i=0; i<COLS; i++)
+			initialConfig[i] = bool(d4.roll()%2);
+		
+			autocell = Automaton(rule, initialConfig);
+	}
 
-	Automaton autocell(rule, initialConfig);
 
-	char input = ' ';
-	
 	move(LINES-1, 0);
 
 	bool noPause = false;
